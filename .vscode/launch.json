@@ -1,0 +1,30 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceRoot}/build/catpong",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "Make",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": true,
+                "showReuseMessage": true,
+                "clear": true,
+            },
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Compound",
+            "configurations": [
+                "Debug",
+                "Debug"
+            ]
+        }
+    ]
+}

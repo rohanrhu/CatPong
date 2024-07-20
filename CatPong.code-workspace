@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.h": "c",
+			"__config": "c",
+			"locale": "c",
+			"complex": "c",
+			"system_error": "c",
+			"condition_variable": "c",
+			"mutex": "c",
+			"version": "c",
+			"thread": "c"
+		},
+		"cmake.options.statusBarVisibility": "visible"
+	}
+}
