@@ -69,7 +69,7 @@ static void server_thread_f(catpong_server_t* server) {
     while (true) {
         uint32_t opcode = 0;
 
-        recv(peer->socket, &opcode, sizeof(opcode), 0);
+        recv(peer->socket, &opcode, sizeof(opcode), MSG_WAITALL);
 
         if (opcode == CATPONG_SERVER_PACKET_JOIN) {
             pthread_mutex_lock(&server->mutex);
@@ -77,7 +77,7 @@ static void server_thread_f(catpong_server_t* server) {
             pthread_mutex_unlock(&server->mutex);
         } else if (opcode == CATPONG_SERVER_PACKET_MOVE) {
             catpong_server_packet_move_t move;
-            recv(peer->socket, &move, sizeof(catpong_server_packet_move_t), 0);
+            recv(peer->socket, &move, sizeof(catpong_server_packet_move_t), MSG_WAITALL);
 
             pthread_mutex_lock(&server->mutex);
             server->peer->on_move(peer, move);
@@ -130,7 +130,7 @@ static void peer_thread_f(catpong_server_peer_t* peer) {
     uint32_t opcode = 0;
 
     RECEIVE:
-    recv(peer->socket, &opcode, sizeof(opcode), 0);
+    recv(peer->socket, &opcode, sizeof(opcode), MSG_WAITALL);
 
     if (opcode == CATPONG_SERVER_PACKET_STARTING) {
         pthread_mutex_lock(&peer->mutex);
@@ -146,7 +146,7 @@ static void peer_thread_f(catpong_server_peer_t* peer) {
         pthread_mutex_unlock(&peer->mutex);
     } else if (opcode == CATPONG_SERVER_PACKET_STATE) {
         catpong_server_packet_state_t state;
-        recv(peer->socket, &state, sizeof(catpong_server_packet_state_t), 0);
+        recv(peer->socket, &state, sizeof(catpong_server_packet_state_t), MSG_WAITALL);
         
         pthread_mutex_lock(&peer->mutex);
         peer->on_state(peer, state);
