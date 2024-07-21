@@ -188,8 +188,8 @@ void catpong_server_disconnect(catpong_server_peer_t* peer) {
     pthread_mutex_lock(&peer->mutex);
     peer->is_running = false;
     close(peer->socket);
-    free(peer);
     pthread_mutex_unlock(&peer->mutex);
+    free(peer);
 }
 
 void catpong_server_send(catpong_server_peer_t* peer, catpong_server_packet_opcode_t opcode, const void* data, size_t length) {
